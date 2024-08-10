@@ -7,13 +7,15 @@ const useWatermarkElementsStore = defineStore('watermark-elements', () => {
   let _nextElementId = 1
 
   const elements = ref<WatermarkElement[]>([])
-  const appendElement = (...appendElements: Omit<WatermarkElement, 'id'>[]) => {
-    const elementsWithId = appendElements.map<WatermarkElement>((it) => ({
-      ...it,
+  const appendElement = (element: Omit<WatermarkElement, 'id'>) => {
+    const elementWithId = {
+      ...element,
       id: _nextElementId++
-    }))
+    }
 
-    elements.value.push(...elementsWithId)
+    elements.value.push(elementWithId)
+
+    return elementWithId
   }
 
   const _selectedElementIndex = shallowRef<number>(-1)
