@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div :class="[styles.container]">
     <LabelControl v-model="props.selectedElement.label" />
     <PositionControl v-model="props.selectedElement.position" />
     <RotationControl v-model="props.selectedElement.rotation" />

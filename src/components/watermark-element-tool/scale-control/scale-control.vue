@@ -1,16 +1,14 @@
 <template>
   <div :class="[styles.container]">
-    <span>
+    <span :class="[styles.label]">
       Scale
     </span>
 
-    <div :class="[styles.controlsContainer]">
-      <RangeControl :model-value="scale[0]" @update:model-value="whenChangeByX" label="X (by horizontal)" name="scale-x"
-        :min="0.1" :max="5" :step="0.1" />
+    <RangeControl :model-value="scale[0]" @update:model-value="whenChangeByX" label="X (by horizontal)" name="scale-x"
+      :min="0.1" :max="5" :step="0.1" />
 
-      <RangeControl :model-value="scale[1]" @update:model-value="whenChangeByY" label="Y (by vertical)" name="scale-y"
-        :min="0.1" :max="5" :step="0.1" />
-    </div>
+    <RangeControl :model-value="scale[1]" @update:model-value="whenChangeByY" label="Y (by vertical)" name="scale-y"
+      :min="0.1" :max="5" :step="0.1" />
   </div>
 </template>
 

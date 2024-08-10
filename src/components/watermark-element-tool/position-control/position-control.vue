@@ -1,16 +1,14 @@
 <template>
   <div :class="[styles.container]">
-    <span>
+    <span :class="[styles.label]">
       Position
     </span>
 
-    <div :class="[styles.controlsContainer]">
-      <RangeControl :model-value="position[0]" @update:model-value="whenChangeByX" label="X (by horizontal)"
-        name="position-x" :min="0" :max="100" :step="1" />
+    <RangeControl :model-value="position[0]" @update:model-value="whenChangeByX" label="X (by horizontal)"
+      name="position-x" :min="0" :max="100" :step="1" />
 
-      <RangeControl :model-value="position[1]" @update:model-value="whenChangeByY" label="Y (by vertical)"
-        name="position-y" :min="0" :max="100" :step="1" />
-    </div>
+    <RangeControl :model-value="position[1]" @update:model-value="whenChangeByY" label="Y (by vertical)"
+      name="position-y" :min="0" :max="100" :step="1" />
   </div>
 </template>
 

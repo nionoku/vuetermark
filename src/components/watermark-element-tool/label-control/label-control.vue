@@ -1,13 +1,11 @@
 <template>
-  <div :class="[styles.container]">
-    <label>
-      <span>
-        Label
-      </span>
+  <label :class="[styles.container]">
+    <span>
+      Label
+    </span>
 
-      <input name="label" type="text" maxlength="50" :value="label" @input="whenChange">
-    </label>
-  </div>
+    <input name="label" type="text" maxlength="50" :value="label" @input="whenChange">
+  </label>
 </template>
 
 <script lang="ts" setup>
