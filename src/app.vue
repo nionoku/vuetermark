@@ -1,12 +1,8 @@
 <template>
-  <Editor :photo="photoLink" />
+  <Editor />
 </template>
 
 <script lang="ts" setup>
-import { storeToRefs } from 'pinia';
-import Editor from './components/editor/index.vue'
-import { useEditorStore } from './stores/editor/index';
-
-const { photoLink } = storeToRefs(useEditorStore())
+import Editor from './components/editor/editor.vue'
 
 </script>

@@ -2,10 +2,15 @@ import { Ref, computed } from "vue"
 import { WatermarkElement } from "../../../stores/watermark-elements/types/watermark-element"
 
 const useTransform = (element: Ref<WatermarkElement>) => {
+  const toPositionValue = (value: number) => value + '%'
+  const toRotationValue = (value: number) => value + 'deg'
+
   const transform = computed(() => {
     const transforms = {
-      translate: element.value.position,
-      rotate: element.value.rotation,
+      translate: element.value.position
+        .map(toPositionValue),
+      rotate: element.value.rotation
+        .map(toRotationValue),
       scale: element.value.scale
     }
   

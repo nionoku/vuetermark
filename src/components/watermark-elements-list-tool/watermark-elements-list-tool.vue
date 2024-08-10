@@ -1,10 +1,10 @@
 <template>
   <div>
-    <WatermarkElementsList :elements="elements" />
-
     <button @click="whenClick">
       Add watermark element
     </button>
+
+    <WatermarkElementsList :elements="elements" />
   </div>
 </template>
 
@@ -19,10 +19,10 @@ const { elements } = storeToRefs(useWatermarkElementsStore())
 
 const whenClick = () => {
   appendElement({
-    label: 'Hello world',
+    label: '',
 
-    position: ['50%', '50%'],
-    rotation: '0deg',
+    position: [50, 50],
+    rotation: [0],
     scale: [1, 1]
   })
 }

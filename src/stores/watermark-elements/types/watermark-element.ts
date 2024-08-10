@@ -2,8 +2,10 @@ type WatermarkElement = {
   id: number
   label: string
 
-  position: [number | string, number | string]
-  rotation: string
+  /** @description position in percents */
+  position: [number, number]
+  /** @description rotation in degrees */
+  rotation: [number]
   scale: [number, number]
 }
 

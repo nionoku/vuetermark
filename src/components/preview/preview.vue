@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 import styles from './index.module.css'
-import WatermarkElement from '../watermark-element/index.vue'
+import WatermarkElement from '../watermark-element/watermark-element.vue'
 import { getImage } from './utils/get-image';
 import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import { storeToRefs } from 'pinia';
@@ -19,7 +19,7 @@ import { storeToRefs } from 'pinia';
 const { elements } = storeToRefs(useWatermarkElementsStore())
 
 defineProps<{
-  photo: string
+  photo: string | undefined
 }>();
 
 const svgElement = ref<SVGElement>()

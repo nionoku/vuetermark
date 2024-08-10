@@ -5,7 +5,7 @@
         {{ elem.id }}
       </span>
 
-      <span>
+      <span v-if="elem.label">
         ({{ elem.label }})
       </span>
     </li>
