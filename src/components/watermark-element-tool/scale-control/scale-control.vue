@@ -5,26 +5,17 @@
     </span>
 
     <div :class="[styles.controlsContainer]">
-      <label>
-        <span>
-          X (by horizontal)
-        </span>
+      <RangeControl :model-value="scale[0]" @update:model-value="whenChangeByX" label="X (by horizontal)" name="scale-x"
+        :min="0.1" :max="5" :step="0.1" />
 
-        <input name="scale-x" type="range" min="0.1" max="5" step="0.1" :value="scale[0]" @input="whenChangeByX">
-      </label>
-
-      <label>
-        <span>
-          Y (by vertical)
-        </span>
-
-        <input name="scale-y" type="range" min="0.1" max="5" step="0.1" :value="scale[1]" @input="whenChangeByY">
-      </label>
+      <RangeControl :model-value="scale[1]" @update:model-value="whenChangeByY" label="Y (by vertical)" name="scale-y"
+        :min="0.1" :max="5" :step="0.1" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import RangeControl from '../../_ui/range-control/range-control.vue';
 import { WatermarkElement } from '../../../stores/watermark-elements/types/watermark-element';
 import styles from './index.module.css'
 
@@ -32,15 +23,11 @@ const scale = defineModel<WatermarkElement['scale']>({
   required: true
 })
 
-const whenChangeByX = (event: Event) => {
-  const value = parseFloat((event.target as HTMLInputElement).value)
-
+const whenChangeByX = (value: number) => {
   return scale.value[0] = value
 }
 
-const whenChangeByY = (event: Event) => {
-  const value = parseFloat((event.target as HTMLInputElement).value)
-
+const whenChangeByY = (value: number) => {
   return scale.value[1] = value
 }
 

@@ -5,26 +5,17 @@
     </span>
 
     <div :class="[styles.controlsContainer]">
-      <label>
-        <span>
-          X (by horizontal)
-        </span>
+      <RangeControl :model-value="position[0]" @update:model-value="whenChangeByX" label="X (by horizontal)"
+        name="position-x" :min="0" :max="100" :step="1" />
 
-        <input name="position-x" type="range" min="0" max="100" step="1" :value="position[0]" @input="whenChangeByX">
-      </label>
-
-      <label>
-        <span>
-          Y (by vertical)
-        </span>
-
-        <input name="position-y" type="range" min="0" max="100" step="1" :value="position[1]" @input="whenChangeByY">
-      </label>
+      <RangeControl :model-value="position[1]" @update:model-value="whenChangeByY" label="Y (by vertical)"
+        name="position-y" :min="0" :max="100" :step="1" />
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+import RangeControl from '../../_ui/range-control/range-control.vue';
 import { WatermarkElement } from '../../../stores/watermark-elements/types/watermark-element';
 import styles from './index.module.css'
 
@@ -32,16 +23,12 @@ const position = defineModel<WatermarkElement['position']>({
   required: true
 })
 
-const whenChangeByX = (event: Event) => {
-  const value = parseInt((event.target as HTMLInputElement).value)
-
-  return position.value[0] = value
+const whenChangeByX = (value: number) => {
+  return position.value[0] = Math.round(value)
 }
 
-const whenChangeByY = (event: Event) => {
-  const value = parseInt((event.target as HTMLInputElement).value)
-
-  return position.value[1] = value
+const whenChangeByY = (value: number) => {
+  return position.value[1] = Math.round(value)
 }
 
 </script>
