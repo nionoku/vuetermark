@@ -1,3 +1,5 @@
+import { GradientRepresentation } from "./gradient-representation"
+
 type WatermarkElement = {
   id: number
   label: string
@@ -7,6 +9,7 @@ type WatermarkElement = {
   /** @description rotation in degrees */
   rotation: [number]
   scale: [number, number]
+  color: string | GradientRepresentation | null
 }
 
 export type {

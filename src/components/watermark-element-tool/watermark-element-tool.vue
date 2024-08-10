@@ -5,6 +5,7 @@
       <PositionControl v-model="props.selectedElement.position" />
       <RotationControl v-model="props.selectedElement.rotation" />
       <ScaleControl v-model="props.selectedElement.scale" />
+      <ColorControl v-model="props.selectedElement.color" />
 
     </div>
 
@@ -22,6 +23,7 @@ import LabelControl from './label-control/label-control.vue';
 import RotationControl from './rotation-control/rotation-control.vue';
 import ScaleControl from './scale-control/scale-control.vue';
 import { useWatermarkElementsStore } from '../../stores/watermark-elements';
+import ColorControl from './color-control/color-control.vue';
 
 const props = defineProps<{
   selectedElement: WatermarkElement

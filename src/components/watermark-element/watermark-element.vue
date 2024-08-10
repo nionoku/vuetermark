@@ -1,17 +1,44 @@
 <template>
   <g :data-watermark="element.id" :style="{ transform }">
-    <text text-anchor="middle">{{ element.label }}</text>
+    <defs v-if="isColorIsGradient">
+      <LinearGradient v-if="colorLinearGradient" :model-value="colorLinearGradient" :id="'gradient_' + element.id" />
+      <RadialGradient v-if="colorRadialGradient" :model-value="colorRadialGradient" :id="'gradient_' + element.id" />
+    </defs>
+
+    <text text-anchor="middle" :style="{ fill }">{{ element.label }}</text>
   </g>
 </template>
 
 <script lang="ts" setup>
-import { toRef } from 'vue';
+import { computed } from 'vue';
 import { WatermarkElement } from '../../stores/watermark-elements/types/watermark-element';
 import { useTransform } from './composable/use-transform';
+import LinearGradient from './linear-gradient/linear-gradient.vue';
+import RadialGradient from './radial-gradient/radial-gradient.vue';
 
-const props = defineProps<{
-  element: WatermarkElement
-}>();
+const element = defineModel<WatermarkElement>({
+  required: true
+});
 
-const { transform } = useTransform(toRef(props.element))
+const { transform } = useTransform(element)
+
+const colorLinearGradient = computed(() => {
+  if (typeof element.value.color === 'object' && element.value.color?.type === 'linear-gradient') {
+    return element.value.color
+  }
+})
+const colorRadialGradient = computed(() => {
+  if (typeof element.value.color === 'object' && element.value.color?.type === 'radial-gradient') {
+    return element.value.color
+  }
+})
+const isColorIsGradient = computed(() => colorLinearGradient.value || colorRadialGradient.value)
+
+const fill = computed(() => {
+  if (typeof element.value.color === 'string' && CSS.supports('color', element.value.color)) {
+    return element.value.color
+  } else if (isColorIsGradient.value) {
+    return `url('#gradient_${element.value.id}')`
+  }
+})
 </script>

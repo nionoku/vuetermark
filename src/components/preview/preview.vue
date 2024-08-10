@@ -3,7 +3,7 @@
     <image v-if="photo" :href="photo" :class="[styles.photo]" />
 
     <g id="watermark-elements" transform="scale(1, 1)">
-      <WatermarkElement v-for="elem in elements" :element="elem" :key="elem.id" />
+      <WatermarkElement v-for="elem in elements" :model-value="elem" :key="elem.id" />
     </g>
   </svg>
 </template>
