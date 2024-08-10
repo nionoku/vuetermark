@@ -1,15 +1,12 @@
 <template>
-  <Editor :photo="ExamplePhoto" />
+  <Editor :photo="photoLink" />
 </template>
 
 <script lang="ts" setup>
+import { storeToRefs } from 'pinia';
 import Editor from './components/editor/index.vue'
-import ExamplePhoto from './assets/example.jpg'
+import { useEditorStore } from './stores/editor/index';
 
-const props = defineProps<{
-}>();
-
-const emits = defineEmits({
-});
+const { photoLink } = storeToRefs(useEditorStore())
 
 </script>
