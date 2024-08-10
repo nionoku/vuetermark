@@ -1,6 +1,7 @@
 <template>
   <div :class="[styles.container]">
     <PickFileTool v-if="state === EditorState.WAIT_FILE" />
+    <WatermarkElementsTool v-else-if="state === EditorState.EDITING" />
   </div>
 </template>
 
@@ -9,6 +10,7 @@ import { storeToRefs } from 'pinia';
 import { useEditorStore } from '../../stores/editor';
 import { EditorState } from '../../stores/editor/constants/state-enum';
 import PickFileTool from '../pick-file-tool/index.vue'
+import WatermarkElementsTool from '../watermark-elements-tool/index.vue'
 import styles from './index.module.css'
 
 const { state } = storeToRefs(useEditorStore())
