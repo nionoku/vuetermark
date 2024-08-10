@@ -6,7 +6,7 @@
       <RotationControl v-model="props.selectedElement.rotation" />
       <ScaleControl v-model="props.selectedElement.scale" />
       <ColorControl v-model="props.selectedElement.color" />
-
+      <OpacityControl v-model="props.selectedElement.opacity" />
     </div>
 
     <button @click="whenCloseElementEditor">
@@ -24,6 +24,7 @@ import RotationControl from './rotation-control/rotation-control.vue';
 import ScaleControl from './scale-control/scale-control.vue';
 import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import ColorControl from './color-control/color-control.vue';
+import OpacityControl from './opacity-control/opacity-control.vue';
 
 const props = defineProps<{
   selectedElement: WatermarkElement

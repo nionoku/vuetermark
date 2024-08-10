@@ -23,8 +23,10 @@ const whenClick = () => {
     label: '',
 
     position: [50, 50],
-    rotation: [0],
-    scale: [1, 1]
+    rotation: 0,
+    scale: [1, 1],
+    color: null,
+    opacity: 1,
   })
 
   setSelectedElement(element)

@@ -9,8 +9,7 @@ const useTransform = (element: Ref<WatermarkElement>) => {
     const transforms = {
       translate: element.value.position
         .map(toPositionValue),
-      rotate: element.value.rotation
-        .map(toRotationValue),
+      rotate: toRotationValue(element.value.rotation),
       scale: element.value.scale
     }
   

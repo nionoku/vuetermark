@@ -7,9 +7,10 @@ type WatermarkElement = {
   /** @description position in percents */
   position: [number, number]
   /** @description rotation in degrees */
-  rotation: [number]
+  rotation: number
   scale: [number, number]
   color: string | GradientRepresentation | null
+  opacity: number
 }
 
 export type {
