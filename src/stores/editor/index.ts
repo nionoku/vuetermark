@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { computed, shallowRef } from "vue";
-import { EditorState } from "./state-enum";
+import { EditorState } from "./constants/state-enum";
 
 const useEditorStore = defineStore('editor', () => {
   const state = shallowRef<EditorState>(EditorState.WAIT_FILE);

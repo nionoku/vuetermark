@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 import { storeToRefs } from 'pinia';
 import { useEditorStore } from '../../stores/editor';
-import { EditorState } from '../../stores/editor/state-enum';
+import { EditorState } from '../../stores/editor/constants/state-enum';
 import PickFileTool from '../pick-file-tool/index.vue'
 import styles from './index.module.css'
 
