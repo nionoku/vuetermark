@@ -5,7 +5,8 @@
       <RadialGradient v-if="colorRadialGradient" :model-value="colorRadialGradient" :id="'gradient_' + element.id" />
     </defs>
 
-    <text text-anchor="middle" :letter-spacing="element.letterSpacing" :style="{ fill, opacity: element.opacity }">
+    <text text-anchor="middle" :letter-spacing="element.letterSpacing"
+      :style="{ fill, opacity: element.opacity, textShadow: element.shadow, filter: element.filter }">
       {{ element.label }}
     </text>
   </g>
@@ -17,24 +18,19 @@ import { WatermarkElement } from '../../stores/watermark-elements/types/watermar
 import { useTransform } from './composable/use-transform';
 import LinearGradient from './linear-gradient/linear-gradient.vue';
 import RadialGradient from './radial-gradient/radial-gradient.vue';
+import { useGradientRepresentation } from './composable/use-gradient-representation';
 
 const element = defineModel<WatermarkElement>({
   required: true
 });
 
 const { transform } = useTransform(element)
+const {
+  isColorIsGradient,
 
-const colorLinearGradient = computed(() => {
-  if (typeof element.value.color === 'object' && element.value.color?.type === 'linear-gradient') {
-    return element.value.color
-  }
-})
-const colorRadialGradient = computed(() => {
-  if (typeof element.value.color === 'object' && element.value.color?.type === 'radial-gradient') {
-    return element.value.color
-  }
-})
-const isColorIsGradient = computed(() => colorLinearGradient.value || colorRadialGradient.value)
+  colorLinearGradient,
+  colorRadialGradient
+} = useGradientRepresentation(element.value.color)
 
 const fill = computed(() => {
   if (typeof element.value.color === 'string' && CSS.supports('color', element.value.color)) {
