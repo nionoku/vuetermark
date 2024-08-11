@@ -1,6 +1,6 @@
 <template>
   <div :class="[styles.container]">
-    <Preview :photo="photoLink" :class="[styles.preview]" />
+    <Preview ref="previewRef" :photo="photoLink" :class="[styles.preview]" />
 
     <Tools :class="[styles.tools]" />
   </div>
@@ -12,7 +12,24 @@ import Preview from '../preview/preview.vue'
 import Tools from '../tools/tools.vue'
 import styles from './index.module.css'
 import { useEditorStore } from '../../stores/editor';
+import { useCallExportToPNG } from '../../composables/use-call-export';
+import { onUnmounted, ref } from 'vue';
+import { download } from '../../utils/download';
 
 const { photoLink } = storeToRefs(useEditorStore())
+const previewRef = ref<InstanceType<typeof Preview>>()
+const { on: whenCallExportToPNG } = useCallExportToPNG
+
+const unsubscribeCallExportToPNG = whenCallExportToPNG(async () => {
+  if (previewRef.value) {
+    const imageUri = await previewRef.value.getImage()
+
+    download(imageUri, 'test.png')
+  }
+})
+
+onUnmounted(() => {
+  unsubscribeCallExportToPNG()
+})
 
 </script>

@@ -18,13 +18,13 @@ import { storeToRefs } from 'pinia';
 
 const { elements } = storeToRefs(useWatermarkElementsStore())
 
-defineProps<{
+const props = defineProps<{
   photo: string | undefined
 }>();
 
 const svgElement = ref<SVGElement>()
 
 defineExpose({
-  getImage: () => getImage(svgElement.value)
+  getImage: () => getImage(props.photo, svgElement.value)
 })
 </script>

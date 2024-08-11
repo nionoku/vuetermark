@@ -1,8 +1,10 @@
 <template>
   <div :class="[styles.container]">
     <PickFileTool v-if="state === EditorState.WAIT_FILE" />
+
     <WatermarkElementTool v-else-if="state === EditorState.EDITING && selectedElement"
       :selected-element="selectedElement" />
+
     <WatermarkElementsListTool v-else-if="state === EditorState.EDITING" />
   </div>
 </template>

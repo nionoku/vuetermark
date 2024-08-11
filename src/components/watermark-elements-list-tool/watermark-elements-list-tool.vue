@@ -1,7 +1,11 @@
 <template>
-  <div>
-    <button @click="whenClick">
+  <div :class="[styles.container]">
+    <button @click="whenClickCreateBlankElement">
       Add watermark element
+    </button>
+
+    <button @click="whenClickExportImageToPNG">
+      Export to PNG
     </button>
 
     <WatermarkElementsList :elements="elements" @item-click="whenItemClick" />
@@ -14,18 +18,23 @@ import { storeToRefs } from 'pinia';
 import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import WatermarkElementsList from '../watermark-elements-list/watermark-elements-list.vue'
 import { WatermarkElement } from '../../stores/watermark-elements/types/watermark-element';
+import { useCallExportToPNG } from '../../composables/use-call-export';
 
 const { createBlankElement, setSelectedElement } = useWatermarkElementsStore()
 const { elements } = storeToRefs(useWatermarkElementsStore())
+const { emit: exportToPNG } = useCallExportToPNG
 
-const whenClick = () => {
+const whenClickCreateBlankElement = () => {
   const element = createBlankElement()
-
   setSelectedElement(element)
 }
 
 const whenItemClick = (element: WatermarkElement) => {
   setSelectedElement(element)
+}
+
+const whenClickExportImageToPNG = () => {
+  exportToPNG()
 }
 
 </script>
