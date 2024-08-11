@@ -1,6 +1,6 @@
 <template>
   <div :class="[styles.container]">
-    <Preview ref="previewRef" :photo="photoLink" :class="[styles.preview]" />
+    <Preview ref="previewRef" :photo="photo" :class="[styles.preview]" />
 
     <Tools :class="[styles.tools]" />
   </div>
@@ -16,7 +16,7 @@ import { useCallExportToPNG } from '../../composables/use-call-export';
 import { onUnmounted, ref } from 'vue';
 import { download } from '../../utils/download';
 
-const { photoLink } = storeToRefs(useEditorStore())
+const { photo } = storeToRefs(useEditorStore())
 const previewRef = ref<InstanceType<typeof Preview>>()
 const { on: whenCallExportToPNG } = useCallExportToPNG
 

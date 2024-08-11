@@ -2,11 +2,11 @@ const toDataUri = (svg: SVGElement) => {
   return 'data:image/svg+xml;base64,' + btoa(svg.outerHTML)
 }
 
-const getCanvas = (origin: HTMLImageElement): [HTMLCanvasElement, CanvasRenderingContext2D] => {
+const getCanvas = (width: number, height: number): [HTMLCanvasElement, CanvasRenderingContext2D] => {
   const canvas = document.createElement('canvas')
 
-  canvas.width = origin.width
-  canvas.height = origin.height
+  canvas.width = width
+  canvas.height = height
 
   const context = canvas.getContext('2d')
 
@@ -18,32 +18,33 @@ const getCanvas = (origin: HTMLImageElement): [HTMLCanvasElement, CanvasRenderin
 }
 
 /** Method transform svg watermark and return base64 of png */
-const getImage = (origin: string | undefined, svg: SVGElement | undefined): Promise<string> => {
-  if (!origin) {
-    throw new Error('Origin is undefined')
-  }
-  
+const getImage = (svg: SVGElement | undefined, originLink: string | undefined): Promise<string> => {
   if (!svg) {
     throw new Error('SVG is undefined')
+  }
+
+  if (!originLink) {
+    throw new Error('Origin URL is undefined')
   }
 
   return Promise.all([
     new Promise<HTMLImageElement>((resolve) => {
       const image = new Image()
       image.addEventListener('load', () => resolve(image))
-      image.src = origin
+      image.src = toDataUri(svg)
     }),
     new Promise<HTMLImageElement>((resolve) => {
       const image = new Image()
       image.addEventListener('load', () => resolve(image))
-      image.src = toDataUri(svg)
+      image.src = originLink
     }),
   ])
-    .then(([origin, watermark]) => {
-      const [canvas, context] = getCanvas(origin)
+    .then(([watermark, origin]) => {
+      const { width, height } = origin
+      const [canvas, context] = getCanvas(width, height)
 
-      context.drawImage(origin, 0, 0, origin.width, origin.height)
-      context.drawImage(watermark, 0, 0, origin.width, origin.height)
+      context.drawImage(origin, 0, 0, width, height)
+      context.drawImage(watermark, 0, 0, width * (watermark.width / width), height * (watermark.height / height))
 
       return canvas
     })

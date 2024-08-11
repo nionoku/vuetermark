@@ -1,6 +1,6 @@
 <template>
   <svg xmlns="http://www.w3.org/2000/svg" view-box="0 0 100 100" :class="[styles.container]" ref="svgElement">
-    <image v-if="photo" :href="photo" :class="[styles.photo]" />
+    <image v-if="photoUrl" :href="photoUrl" :class="[styles.photo]" />
 
     <g id="watermark-elements" transform="scale(1, 1)">
       <WatermarkElement v-for="elem in elements" :model-value="elem" :key="elem.id" />
@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { computed, onUnmounted, ref } from 'vue';
 import styles from './index.module.css'
 import WatermarkElement from '../watermark-element/watermark-element.vue'
 import { getImage } from './utils/get-image';
@@ -19,12 +19,20 @@ import { storeToRefs } from 'pinia';
 const { elements } = storeToRefs(useWatermarkElementsStore())
 
 const props = defineProps<{
-  photo: string | undefined
+  photo: File | undefined
 }>();
 
 const svgElement = ref<SVGElement>()
 
+const photoUrl = computed(() => props.photo && URL.createObjectURL(props.photo))
+
+onUnmounted(() => {
+  if (photoUrl.value) {
+    URL.revokeObjectURL(photoUrl.value)
+  }
+})
+
 defineExpose({
-  getImage: () => getImage(props.photo, svgElement.value)
+  getImage: () => getImage(svgElement.value, photoUrl.value)
 })
 </script>
