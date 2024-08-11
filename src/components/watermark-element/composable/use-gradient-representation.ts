@@ -1,4 +1,4 @@
-import { computed, Ref } from "vue"
+import { computed } from "vue"
 import { WatermarkElement } from "../../../stores/watermark-elements/types/watermark-element"
 
 const useGradientRepresentation = (color: WatermarkElement['color']) => {

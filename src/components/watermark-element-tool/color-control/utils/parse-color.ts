@@ -1,6 +1,6 @@
 import { GradientRepresentation } from "../../../../stores/watermark-elements/types/gradient-representation";
 
-const parseColor = (color: string): string | GradientRepresentation | null => {
+const parseColor = (color: string): string | GradientRepresentation => {
   try {
     const matchGradient = color.match(/(linear-gradient|radial-gradient)\((.+)\)/)
 
@@ -36,7 +36,7 @@ const parseColor = (color: string): string | GradientRepresentation | null => {
 
     return color
   } catch (err) {
-    return null;
+    return color;
   }
 }
 

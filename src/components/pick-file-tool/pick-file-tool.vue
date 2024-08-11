@@ -1,10 +1,8 @@
 <template>
   <div :class="[styles.container]">
-    <button @click="open" :class="[styles.button]">
+    <button @click="whenClick" :class="[styles.button]">
       Select file
     </button>
-
-    <input ref="fileInputRef" type="file" @change="usePickFile" :class="[styles.fileInput]" />
   </div>
 </template>
 
@@ -17,6 +15,8 @@ const { open, onChange } = useFileDialog({
   accept: 'image/*',
   reset: true
 })
+
+const whenClick = () => open()
 
 onChange(usePickFile)
 
