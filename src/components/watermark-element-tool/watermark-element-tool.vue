@@ -8,6 +8,8 @@
       <ScaleControl v-model="props.selectedElement.scale" />
       <ColorControl v-model="props.selectedElement.color" />
       <OpacityControl v-model="props.selectedElement.opacity" />
+      <ShadowControl v-model="props.selectedElement.shadow" />
+      <FilterControl v-model="props.selectedElement.filter" />
     </div>
 
     <button @click="whenCloseElementEditor">
@@ -27,6 +29,8 @@ import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import ColorControl from './color-control/color-control.vue';
 import OpacityControl from './opacity-control/opacity-control.vue';
 import LetterSpacingControl from './letter-spacing-control/letter-spacing-control.vue';
+import ShadowControl from './shadow-control/shadow-control.vue';
+import FilterControl from './filter-control/filter-control.vue';
 
 const props = defineProps<{
   selectedElement: WatermarkElement

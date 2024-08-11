@@ -15,21 +15,11 @@ import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import WatermarkElementsList from '../watermark-elements-list/watermark-elements-list.vue'
 import { WatermarkElement } from '../../stores/watermark-elements/types/watermark-element';
 
-const { appendElement, setSelectedElement } = useWatermarkElementsStore()
+const { createBlankElement, setSelectedElement } = useWatermarkElementsStore()
 const { elements } = storeToRefs(useWatermarkElementsStore())
 
 const whenClick = () => {
-  const element = appendElement({
-    label: '',
-
-    position: [50, 50],
-    rotation: 0,
-    scale: [1, 1],
-    color: null,
-    opacity: 1,
-
-    letterSpacing: 1,
-  })
+  const element = createBlankElement()
 
   setSelectedElement(element)
 }

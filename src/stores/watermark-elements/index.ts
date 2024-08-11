@@ -17,6 +17,22 @@ const useWatermarkElementsStore = defineStore('watermark-elements', () => {
 
     return elementWithId
   }
+  const createBlankElement = () => {
+    return appendElement({
+      label: '',
+  
+      position: [50, 50],
+      rotation: 0,
+      scale: [1, 1],
+      color: '',
+      opacity: 1,
+  
+      letterSpacing: 1,
+
+      shadow: '',
+      filter: ''
+    })
+  }
 
   const _selectedElementIndex = shallowRef<number>(-1)
   const setSelectedElement = (element: WatermarkElement | null): number => {
@@ -40,6 +56,7 @@ const useWatermarkElementsStore = defineStore('watermark-elements', () => {
   return {
     elements,
     appendElement,
+    createBlankElement,
 
     selectedElement,
     setSelectedElement,

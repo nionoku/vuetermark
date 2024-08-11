@@ -9,10 +9,13 @@ type WatermarkElement = {
   /** @description rotation in degrees */
   rotation: number
   scale: [number, number]
-  color: string | GradientRepresentation | null
+  color: string | GradientRepresentation
   opacity: number
 
   letterSpacing: number
+
+  shadow: string
+  filter: string
 }
 
 export type {
