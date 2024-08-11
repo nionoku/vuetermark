@@ -5,7 +5,9 @@
       <RadialGradient v-if="colorRadialGradient" :model-value="colorRadialGradient" :id="'gradient_' + element.id" />
     </defs>
 
-    <text text-anchor="middle" :style="{ fill, opacity: element.opacity }">{{ element.label }}</text>
+    <text text-anchor="middle" :letter-spacing="element.letterSpacing" :style="{ fill, opacity: element.opacity }">
+      {{ element.label }}
+    </text>
   </g>
 </template>
 

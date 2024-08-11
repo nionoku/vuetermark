@@ -11,6 +11,8 @@ type WatermarkElement = {
   scale: [number, number]
   color: string | GradientRepresentation | null
   opacity: number
+
+  letterSpacing: number
 }
 
 export type {

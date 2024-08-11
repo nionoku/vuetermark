@@ -27,6 +27,8 @@ const whenClick = () => {
     scale: [1, 1],
     color: null,
     opacity: 1,
+
+    letterSpacing: 1,
   })
 
   setSelectedElement(element)

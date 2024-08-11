@@ -2,6 +2,7 @@
   <div :class="[styles.container]">
     <div :class="[styles.controls]">
       <LabelControl v-model="props.selectedElement.label" />
+      <LetterSpacingControl v-model="props.selectedElement.letterSpacing" />
       <PositionControl v-model="props.selectedElement.position" />
       <RotationControl v-model="props.selectedElement.rotation" />
       <ScaleControl v-model="props.selectedElement.scale" />
@@ -25,6 +26,7 @@ import ScaleControl from './scale-control/scale-control.vue';
 import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import ColorControl from './color-control/color-control.vue';
 import OpacityControl from './opacity-control/opacity-control.vue';
+import LetterSpacingControl from './letter-spacing-control/letter-spacing-control.vue';
 
 const props = defineProps<{
   selectedElement: WatermarkElement
