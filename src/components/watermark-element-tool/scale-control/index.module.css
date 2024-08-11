@@ -7,3 +7,12 @@
 .label {
   grid-column: span 2;
 }
+
+.scaleFixedLabel {
+  width: fit-content;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  gap: var(--space-gap, 4px);
+}
