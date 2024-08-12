@@ -13,7 +13,11 @@
     </div>
 
     <button @click="whenCloseElementEditor">
-      Close element editor
+      Save and close element editor
+    </button>
+
+    <button @click="whenRemoveElement">
+      Remove element
     </button>
   </div>
 </template>
@@ -36,10 +40,14 @@ const props = defineProps<{
   selectedElement: WatermarkElement
 }>();
 
-const { setSelectedElement } = useWatermarkElementsStore()
+const { setSelectedElement, removeSelectedElement } = useWatermarkElementsStore()
 
 const whenCloseElementEditor = () => {
-  setSelectedElement(null)
+  setSelectedElement(undefined)
+}
+
+const whenRemoveElement = () => {
+  removeSelectedElement()
 }
 
 </script>

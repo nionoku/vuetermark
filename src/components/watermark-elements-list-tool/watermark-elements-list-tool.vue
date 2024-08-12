@@ -20,13 +20,12 @@ import WatermarkElementsList from '../watermark-elements-list/watermark-elements
 import { WatermarkElement } from '../../stores/watermark-elements/types/watermark-element';
 import { useCallExportToPNG } from '../../composables/use-call-export';
 
-const { createBlankElement, setSelectedElement } = useWatermarkElementsStore()
+const { setSelectedElement, createElementAndSelect } = useWatermarkElementsStore()
 const { elements } = storeToRefs(useWatermarkElementsStore())
 const { emit: exportToPNG } = useCallExportToPNG
 
 const whenClickCreateBlankElement = () => {
-  const element = createBlankElement()
-  setSelectedElement(element)
+  createElementAndSelect()
 }
 
 const whenItemClick = (element: WatermarkElement) => {

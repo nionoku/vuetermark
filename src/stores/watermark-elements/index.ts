@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { computed, ref, shallowRef } from "vue";
+import { ref } from "vue";
 import { WatermarkElement } from "./types/watermark-element";
 
 
@@ -34,32 +34,43 @@ const useWatermarkElementsStore = defineStore('watermark-elements', () => {
     })
   }
 
-  const _selectedElementIndex = shallowRef<number>(-1)
-  const setSelectedElement = (element: WatermarkElement | null): number => {
+  const _selectedElement = ref<WatermarkElement | undefined>()
+  const setSelectedElement = (element: WatermarkElement | undefined): WatermarkElement | undefined => {
     if (!element) {
-      return _selectedElementIndex.value = -1
+      return _selectedElement.value = undefined
     }
     
-    const index = elements.value.indexOf(element)
-
-    if (index < 0) {
+    if (!elements.value.includes(element)) {
       throw new Error('Before select element, append it to elements')
     }
 
-    return _selectedElementIndex.value = index
+    return _selectedElement.value = element
   }
+  const createElementAndSelect = () => {
+    setSelectedElement(createBlankElement())
+  }
+  const removeSelectedElement = () => {
+    if (_selectedElement.value) {
+      const index = elements.value.indexOf(_selectedElement.value)
 
-  const selectedElement = computed<WatermarkElement | undefined>(() => {
-    return elements.value[_selectedElementIndex.value]
-  })
+      if (index === -1) {
+        return
+      }
+
+      elements.value.splice(index, 1)
+      setSelectedElement(undefined)
+    }
+  }
 
   return {
     elements,
     appendElement,
     createBlankElement,
 
-    selectedElement,
+    selectedElement: _selectedElement,
     setSelectedElement,
+    createElementAndSelect,
+    removeSelectedElement,
   }
 })
 
