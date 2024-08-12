@@ -1,16 +1,16 @@
-import { computed } from "vue"
+import { computed, Ref } from "vue"
 import { WatermarkElement } from "../../../stores/watermark-elements/types/watermark-element"
 
-const useGradientRepresentation = (color: WatermarkElement['color']) => {
+const useGradientRepresentation = (color: Ref<WatermarkElement['color']>) => {
   const colorLinearGradient = computed(() => {
-    if (typeof color === 'object' && color.type === 'linear-gradient') {
-      return color
+    if (typeof color.value === 'object' && color.value.type === 'linear-gradient') {
+      return color.value
     }
   })
 
   const colorRadialGradient = computed(() => {
-    if (typeof color === 'object' && color.type === 'radial-gradient') {
-      return color
+    if (typeof color.value === 'object' && color.value.type === 'radial-gradient') {
+      return color.value
     }
   })
 

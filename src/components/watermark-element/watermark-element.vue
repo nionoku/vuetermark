@@ -1,5 +1,5 @@
 <template>
-  <g :data-watermark="element.id" :style="{ transform }">
+  <g :style="{ transform }">
     <defs v-if="isColorIsGradient">
       <LinearGradient v-if="colorLinearGradient" :model-value="colorLinearGradient" :id="'gradient_' + element.id" />
       <RadialGradient v-if="colorRadialGradient" :model-value="colorRadialGradient" :id="'gradient_' + element.id" />
@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
+import { computed, toRef } from 'vue';
 import { WatermarkElement } from '../../stores/watermark-elements/types/watermark-element';
 import { useTransform } from './composable/use-transform';
 import LinearGradient from './linear-gradient/linear-gradient.vue';
@@ -30,7 +30,7 @@ const {
 
   colorLinearGradient,
   colorRadialGradient
-} = useGradientRepresentation(element.value.color)
+} = useGradientRepresentation(toRef(element.value.color))
 
 const fill = computed(() => {
   if (typeof element.value.color === 'string' && CSS.supports('color', element.value.color)) {
