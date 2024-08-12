@@ -10,6 +10,7 @@
 import styles from './index.module.css'
 import { usePickFile } from './composables/use-pick-file';
 import { useFileDialog } from '@vueuse/core';
+import { setTitle } from '../../utils/set-title';
 
 const { open, onChange } = useFileDialog({
   accept: 'image/*',
@@ -18,6 +19,12 @@ const { open, onChange } = useFileDialog({
 
 const whenClick = () => open()
 
-onChange(usePickFile)
+onChange(async (files) => {
+  const file = await usePickFile(files)
+
+  if (file.name) {
+    setTitle(file.name)
+  }
+})
 
 </script>
