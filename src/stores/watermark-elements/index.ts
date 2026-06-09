@@ -24,6 +24,10 @@ const useWatermarkElementsStore = defineStore('watermark-elements', () => {
       position: [50, 50],
       rotation: 0,
       scale: [1, 1],
+      multiplier: [0, 0],
+      multiplierGap: [100, 100],
+      randomRotation: 0,
+      randomScale: 0,
       color: '',
       opacity: 1,
   
