@@ -1,0 +1,9 @@
+.container {
+  display: grid;
+
+  gap: var(--space-gap, 4px);
+}
+
+.label {
+  grid-column: span 2;
+}

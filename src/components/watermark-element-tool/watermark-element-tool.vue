@@ -6,6 +6,10 @@
       <PositionControl v-model="props.selectedElement.position" />
       <RotationControl v-model="props.selectedElement.rotation" />
       <ScaleControl v-model="props.selectedElement.scale" />
+      <MultiplierControl v-model:multiplier="props.selectedElement.multiplier"
+        v-model:multiplier-gap="props.selectedElement.multiplierGap" />
+      <RandomRotationControl v-model="props.selectedElement.randomRotation" />
+      <RandomScaleControl v-model="props.selectedElement.randomScale" />
       <ColorControl v-model="props.selectedElement.color" />
       <OpacityControl v-model="props.selectedElement.opacity" />
       <ShadowControl v-model="props.selectedElement.shadow" />
@@ -29,6 +33,9 @@ import PositionControl from './position-control/position-control.vue';
 import LabelControl from './label-control/label-control.vue';
 import RotationControl from './rotation-control/rotation-control.vue';
 import ScaleControl from './scale-control/scale-control.vue';
+import MultiplierControl from './multiplier-control/multiplier-control.vue';
+import RandomRotationControl from './random-rotation-control/random-rotation-control.vue';
+import RandomScaleControl from './random-scale-control/random-scale-control.vue';
 import { useWatermarkElementsStore } from '../../stores/watermark-elements';
 import ColorControl from './color-control/color-control.vue';
 import OpacityControl from './opacity-control/opacity-control.vue';
